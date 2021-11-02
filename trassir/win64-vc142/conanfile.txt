@@ -18,7 +18,7 @@ gsoap_utils/2.8.93@trassir/stable
 Guardant/7.update7@trassir/stable
 hdf5/1.10.6
 hidapi/0.10.1
-hikvision-pacs-sdk/6.1.4.42@trassir/stable
+hikvision-pacs-sdk/6.1.4.42@trassir/sdk142
 icu/64.2.dssl2
 intel_media_sdk/2018R2_1
 jansson/2.12
