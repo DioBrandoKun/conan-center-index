@@ -19,6 +19,7 @@ gflags/2.2.2
 glog/0.4.0
 gsoap_utils/2.8.93@trassir/stable
 Guardant/7.update7@trassir/stable
+HCNetSDKGrabber/6.1.6.3@trassir/sdk142
 hdf5/1.10.6
 hidapi/0.10.1
 hikvision-pacs-sdk/6.1.4.42@trassir/sdk142
@@ -76,6 +77,7 @@ freetype:with_png=True
 freetype:with_zlib=True
 gflags:shared=True
 glog:shared=True
+HCNetSDKGrabber:shared=True
 hdf5:shared=True
 hidapi:shared=True
 icu:shared=True
