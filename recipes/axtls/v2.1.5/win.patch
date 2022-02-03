@@ -1,6 +1,6 @@
-diff -Naur /tmp/axTLS-2.1.5/axtls-code/crypto/crypto.h /tmp/axTLS-2.1.5_win_patch/axtls-code/crypto/crypto.h
---- /tmp/axTLS-2.1.5/axtls-code/crypto/crypto.h	2022-02-02 15:34:58.352306815 +0300
-+++ /tmp/axTLS-2.1.5_win_patch/axtls-code/crypto/crypto.h	2022-02-02 15:36:35.923742134 +0300
+diff -Naur a/crypto/crypto.h b/crypto/crypto.h
+--- a/crypto/crypto.h	2022-02-02 21:33:06.603602327 +0300
++++ b/crypto/crypto.h	2022-02-02 21:33:25.971261272 +0300
 @@ -46,7 +46,7 @@
  #define STDCALL
  #endif
@@ -79,9 +79,21 @@ diff -Naur /tmp/axTLS-2.1.5/axtls-code/crypto/crypto.h /tmp/axTLS-2.1.5_win_patc
  
  /**************************************************************************
   * MD5 declarations 
-diff -Naur /tmp/axTLS-2.1.5/axtls-code/crypto/os_int.h /tmp/axTLS-2.1.5_win_patch/axtls-code/crypto/os_int.h
---- /tmp/axTLS-2.1.5/axtls-code/crypto/os_int.h	2022-02-02 15:34:58.352306815 +0300
-+++ /tmp/axTLS-2.1.5_win_patch/axtls-code/crypto/os_int.h	2022-02-02 15:36:35.923742134 +0300
+diff -Naur a/crypto/crypto_misc.c b/crypto/crypto_misc.c
+--- a/crypto/crypto_misc.c	2022-02-02 21:33:06.603602327 +0300
++++ b/crypto/crypto_misc.c	2022-02-03 12:50:54.023651442 +0300
+@@ -133,7 +133,7 @@
+  */
+ EXP_FUNC void STDCALL RNG_custom_init(const uint8_t *seed_buf, int size)
+ {
+-#if defined(WIN32) || defined(CONFIG_WIN32_USE_CRYPTO_LIB)
++#if (!defined(CONFIG_USE_DEV_URANDOM) && !defined(CONFIG_WIN32_USE_CRYPTO_LIB))
+     int i;
+ 
+     for (i = 0; i < ENTROPY_POOL_SIZE && i < size; i++)
+diff -Naur a/crypto/os_int.h b/crypto/os_int.h
+--- a/crypto/os_int.h	2022-02-02 21:33:06.603602327 +0300
++++ b/crypto/os_int.h	2022-02-02 21:33:25.971261272 +0300
 @@ -41,25 +41,12 @@
  extern "C" {
  #endif
@@ -108,9 +120,9 @@ diff -Naur /tmp/axTLS-2.1.5/axtls-code/crypto/os_int.h /tmp/axTLS-2.1.5_win_patc
  #ifdef __cplusplus
  }
  #endif
-diff -Naur /tmp/axTLS-2.1.5/axtls-code/ssl/os_port.h /tmp/axTLS-2.1.5_win_patch/axtls-code/ssl/os_port.h
---- /tmp/axTLS-2.1.5/axtls-code/ssl/os_port.h	2022-02-02 15:34:58.352306815 +0300
-+++ /tmp/axTLS-2.1.5_win_patch/axtls-code/ssl/os_port.h	2022-02-02 15:36:35.923742134 +0300
+diff -Naur a/ssl/os_port.h b/ssl/os_port.h
+--- a/ssl/os_port.h	2022-02-02 21:33:06.607602256 +0300
++++ b/ssl/os_port.h	2022-02-02 21:33:25.979261132 +0300
 @@ -46,7 +46,7 @@
  #include <stdio.h>
  
@@ -131,9 +143,9 @@ diff -Naur /tmp/axTLS-2.1.5/axtls-code/ssl/os_port.h /tmp/axTLS-2.1.5_win_patch/
  #else   /* Not Win32 */
  
  #include <unistd.h>
-diff -Naur /tmp/axTLS-2.1.5/axtls-code/ssl/tls1.c /tmp/axTLS-2.1.5_win_patch/axtls-code/ssl/tls1.c
---- /tmp/axTLS-2.1.5/axtls-code/ssl/tls1.c	2022-02-02 15:34:58.352306815 +0300
-+++ /tmp/axTLS-2.1.5_win_patch/axtls-code/ssl/tls1.c	2022-02-02 15:36:35.923742134 +0300
+diff -Naur a/ssl/tls1.c b/ssl/tls1.c
+--- a/ssl/tls1.c	2022-02-02 21:33:06.611602186 +0300
++++ b/ssl/tls1.c	2022-02-02 21:33:25.979261132 +0300
 @@ -311,7 +311,7 @@
  /*
   * Write application data to the client
@@ -143,9 +155,9 @@ diff -Naur /tmp/axTLS-2.1.5/axtls-code/ssl/tls1.c /tmp/axTLS-2.1.5_win_patch/axt
  {
      int n = out_len, nw, i, tot = 0;
  
-diff -Naur /tmp/axTLS-2.1.5/axtls-code/ssl/tls1.h /tmp/axTLS-2.1.5_win_patch/axtls-code/ssl/tls1.h
---- /tmp/axTLS-2.1.5/axtls-code/ssl/tls1.h	2022-02-02 15:34:58.352306815 +0300
-+++ /tmp/axTLS-2.1.5_win_patch/axtls-code/ssl/tls1.h	2022-02-02 15:36:35.923742134 +0300
+diff -Naur a/ssl/tls1.h b/ssl/tls1.h
+--- a/ssl/tls1.h	2022-02-02 21:33:06.623601974 +0300
++++ b/ssl/tls1.h	2022-02-02 21:33:25.979261132 +0300
 @@ -256,7 +256,7 @@
  
  extern const uint8_t ssl_prot_prefs[NUM_PROTOCOLS];

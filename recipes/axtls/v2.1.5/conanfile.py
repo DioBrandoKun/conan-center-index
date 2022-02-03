@@ -59,9 +59,9 @@ class AxtlsConan(ConanFile):
 
         # check recipe conistency
         tools.check_with_algorithm_sum("sha1", "CMakeLists.txt",     "f668b375dcaa4f54d4717f280c979af5beac9dd6")
-        tools.check_with_algorithm_sum("sha1", "win_config.h",       "50ed49d199f6e5d37bdc30fa2c16980667312d0e")
+        tools.check_with_algorithm_sum("sha1", "win_config.h",       "76bc9c3396b51ad34053a7ff25f5ffcd718c25a0")
         tools.check_with_algorithm_sum("sha1", "linux_config.h",     "9642cc945cf8da1819c865a48539f23fad7e6029")
-        tools.check_with_algorithm_sum("sha1", "win.patch",          "3a97288876e0f979d440812d0ebf1d2fa7c9755c")
+        tools.check_with_algorithm_sum("sha1", "win.patch",          "4afe21e9034b096356c192489417739eb667b6ae")
 
         if tools.os_info.is_windows:
             shutil.copyfile(
