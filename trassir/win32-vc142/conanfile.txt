@@ -60,7 +60,6 @@ sip/4.19.3.dssl1
 snappy/1.1.8.dssl1
 xz_utils/5.2.4.dssl1
 zlib/1.2.11
-grpc/1.26.0
 
 [options]
 atl:shared=False
@@ -133,4 +132,3 @@ qt:with_pq=True
 qt:with_odbc=False
 qt:with_openal=False
 qt:with_libpng=True
-grpc:shared=True
