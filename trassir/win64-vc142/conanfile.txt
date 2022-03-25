@@ -165,7 +165,7 @@ openssl:openssldir=None
 openssl:shared=True
 
 pjsip:shared=False
-protobuf:shared=True
+protobuf:shared=False
 protobuf:with_zlib=False
 
 
