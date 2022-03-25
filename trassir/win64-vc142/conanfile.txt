@@ -265,4 +265,4 @@ sqlite3:use_alloca=False
 xz_utils:shared=True
 zlib:minizip=False
 zlib:shared=True
-grpc:shared=True
+grpc:shared=False
