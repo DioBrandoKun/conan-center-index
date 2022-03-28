@@ -35,10 +35,10 @@ class grpcConan(ConanFile):
 
     requires = (
         "zlib/1.2.11",
-        "openssl/1.1.1d",
-        "protobuf/3.9.1",
-        "protoc/3.9.1",
-        "c-ares/1.15.0"
+        "openssl/1.1.1k",
+        "protobuf/3.9.1.dssl2",
+        "protoc/3.9.1.dssl2",
+        "c-ares/1.15.0.dssl1"
     )
 
     def imports(self):
@@ -48,7 +48,7 @@ class grpcConan(ConanFile):
             # `ldd` shows dependencies named like libprotoc.so.3.9.1.0
             self.protobuf_dylib_mask = "*.so.*"
         else:
-            assert False, "grpc package was not checked on your system"
+            self.protobuf_dylib_mask = "*.dll.*"
         self.copy(self.protobuf_dylib_mask, dst="lib", src="lib", root_package="protobuf")
 
     def configure(self):
@@ -64,11 +64,11 @@ class grpcConan(ConanFile):
         os.rename(extracted_dir, self._source_subfolder)
 
         # This patch adds RPATH to grpc plugins binaries for correct work with dynamically built protobuf
-        tools.check_with_algorithm_sum("sha1", "add_rpath.patch", "a6467f92d93a9550e9876ea487c49a24bd34ad97")
+        tools.check_with_algorithm_sum("sha1", "add_rpath.patch", "44e965fe9553d0c567bddd5d0c64e504177aa17f")
         tools.patch(base_path=self._source_subfolder, patch_file="add_rpath.patch", strip=1)
 
         # This patch refers to https://github.com/grpc/grpc/commit/b54a5b338637f92bfcf4b0bc05e0f57a5fd8fadd and helps to avoid hungs during test
-        tools.check_with_algorithm_sum("sha1", "b54a5b338637f92bfcf4b0bc05e0f57a5fd8fadd.patch", "56818a07d0a9b47a32ed65577be777eb224f5c78")
+        tools.check_with_algorithm_sum("sha1", "b54a5b338637f92bfcf4b0bc05e0f57a5fd8fadd.patch", "2e7a4affb6bff79f7e19fc31b4d2137d14eebeaa")
         tools.patch(base_path=self._source_subfolder, patch_file="b54a5b338637f92bfcf4b0bc05e0f57a5fd8fadd.patch", strip=1)
 
         cmake_path = os.path.join(self._source_subfolder, "CMakeLists.txt")
